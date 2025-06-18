@@ -1,5 +1,6 @@
 package com.bankapi.bank_api.modules.transaction;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import com.bankapi.bank_api.exceptions.InsufficientBalanceException;
 import com.bankapi.bank_api.modules.account.entities.AccountEntity;
 import com.bankapi.bank_api.modules.account.repositories.AccountRepository;
 import com.bankapi.bank_api.modules.transaction.dto.TransactionRequestDTO;
@@ -117,8 +119,7 @@ public class CreateTransactionServiceTest {
         when(accountRepository.findByIdForUpdate(accountId)).thenReturn(Optional.of(account));
 
         assertThatThrownBy(() -> createTransactionService.execute(List.of(dto)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("Saldo insuficiente");
+            .isInstanceOf(InsufficientBalanceException.class);
 
         verify(accountRepository, never()).save(any());
         verify(transactionRepository, never()).save(any());

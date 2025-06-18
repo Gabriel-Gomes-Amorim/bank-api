@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bankapi.bank_api.exceptions.InsufficientBalanceException;
 import com.bankapi.bank_api.modules.account.entities.AccountEntity;
 import com.bankapi.bank_api.modules.account.repositories.AccountRepository;
 import com.bankapi.bank_api.modules.transaction.dto.TransactionRequestDTO;
@@ -45,7 +46,7 @@ public class CreateTransactionService {
                 newBalance = newBalance.subtract(dto.getAmount());
                
                 if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
-                    throw new IllegalArgumentException("Saldo insuficiente");
+                    throw new InsufficientBalanceException();
                 }
             } else {
                 newBalance = newBalance.add(dto.getAmount());
