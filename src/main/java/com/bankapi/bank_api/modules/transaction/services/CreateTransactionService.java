@@ -56,7 +56,7 @@ public class CreateTransactionService {
 
             TransactionEntity transaction = new TransactionEntity();
             BeanUtils.copyProperties(dto, transaction);
-            transaction.setAccountId(account.getId()); 
+            transaction.setAccount(account); 
             transactionRepository.save(transaction);
 
             createdTransactions.add(transaction);

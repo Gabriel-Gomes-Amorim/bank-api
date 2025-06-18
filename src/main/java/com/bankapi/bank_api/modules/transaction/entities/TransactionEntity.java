@@ -34,10 +34,6 @@ public class TransactionEntity {
     private AccountEntity account;
 
     @NotNull(message = "This field is required")
-    @Column(name = "account_id", nullable = false)
-    private UUID accountId;
-
-    @NotNull(message = "This field is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TransactionType type;
