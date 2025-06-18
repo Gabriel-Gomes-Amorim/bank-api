@@ -16,7 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,12 +32,10 @@ public class TransactionEntity {
     @JoinColumn(name = "account_id", insertable = false, updatable = false)
     private AccountEntity account;
 
-    @NotNull(message = "This field is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TransactionType type;
 
-    @NotNull(message = "This field is required")
     @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal amount;
 
