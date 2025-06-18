@@ -29,7 +29,7 @@ public class TransactionEntity {
     private UUID id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "account_id", insertable = false, updatable = false)
+    @JoinColumn(name = "account_id")
     private AccountEntity account;
 
     @Enumerated(EnumType.STRING)
